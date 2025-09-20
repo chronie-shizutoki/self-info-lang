@@ -10,7 +10,7 @@
             --primary-color: #6366f1;
             --secondary-color: #8b5cf6;
             --accent-color: #ec4899;
-            --text-color: #f9fafb;
+            --text-color: #ffffff;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
             --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
@@ -24,8 +24,8 @@
         }
         
         body {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-            background-attachment: fixed;
+            background: url('background.jpg') no-repeat center 20%;
+            background-size: cover;
             color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
@@ -38,8 +38,8 @@
         
         .glass-container {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
             border-radius: 24px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
@@ -68,7 +68,7 @@
         p {
             font-size: 1rem;
             margin-bottom: 30px;
-            line-height: 1.6;
+            line-height: 1;
         }
         
         .language-recommendation {
@@ -195,6 +195,15 @@
             <h3>Recommended Language:</h3>
             <div id="recommended-langs"></div>
         </div>
+
+    <div>
+        <p>月に寄りそう乙女の作法  ルナちょむ</p>
+        <p>近月少女的礼仪  樱小路露娜</p>
+        <p>近月少女的禮儀  櫻小路露娜</p>
+        <p>The Principle of Having an Elegance in the Moon  Luna Sakuragi</p>
+        <p>Pixiv ID | 133337546</p>
+    </div>
+
     
     <button id="feedback-button" class="feedback-button">
         <i class="fas fa-comment-dots"></i> Feedback / フィードバック / 反馈 / 回饋
@@ -247,7 +256,7 @@
         });
     </script>
     
-    <script src="example.js"></script>
+    <script src="lang.js"></script>
     <script>
         /**
          * Main application script that works with the LanguageSelector class
