@@ -226,8 +226,13 @@
     </style>
 
     
+    <!-- Feedback button with language-specific text -->
     <button id="feedback-button" class="feedback-button">
-        <i class="fas fa-comment-dots"></i> Feedback / フィードバック / 反馈 / 回饋
+        <i class="fas fa-comment-dots"></i>
+        <span class="feedback-text lang-en">Feedback</span>
+        <span class="feedback-text lang-ja hidden">フィードバック</span>
+        <span class="feedback-text lang-zh-CN hidden">反馈</span>
+        <span class="feedback-text lang-zh-TW hidden">回饋</span>
     </button>
     
     <style>
@@ -260,6 +265,15 @@
             box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
         }
         
+        /* Feedback text styles */
+        .feedback-text {
+            display: none;
+        }
+        
+        .feedback-text.active {
+            display: inline;
+        }
+        
         /* Responsive styles for feedback button */
         @media (max-width: 600px) {
             .feedback-button {
@@ -275,9 +289,175 @@
         document.getElementById('feedback-button').addEventListener('click', function() {
             window.open('https://jyskyp4y.forms.app/untitled-form', '_blank');
         });
+        
+        // Function to update feedback button text based on current language
+        function updateFeedbackButton(languageCode) {
+            // Hide all language-specific text
+            document.querySelectorAll('.feedback-text').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show text for the detected language
+            const langElement = document.querySelector(`.feedback-text.lang-${languageCode}`);
+            if (langElement) {
+                langElement.classList.add('active');
+            } else {
+                // Fallback to English if the language code isn't found
+                document.querySelector('.feedback-text.lang-en').classList.add('active');
+            }
+        }
     </script>
     
     <script src="lang.js"></script>
+    <!-- Global debug function for switching language via console -->
+    <script>
+        // Make this function available in global scope
+        function switchLanguage(languageCode) {
+            // Language data with names and external links
+            const languages = [
+                { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
+                { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
+                { code: 'zh-CN', name: '简体中文（中国大陆）', localName: 'Simplified Chinese (China)', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
+                { code: 'zh-MY', name: '华文（马来西亚）', localName: 'Chinese (Malaysia)', link: 'https://chronie-shizutoki.github.io/self-info-zh-my/' },
+                { code: 'zh-SG', name: '华文（新加坡）', localName: 'Chinese (Singapore)', link: 'https://chronie-shizutoki.github.io/self-info-zh-sg/' },
+                { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
+            ];
+            
+            // Show only the text for the specified language
+            function showLanguageText(languageCode) {
+                // Hide all language-specific text
+                document.querySelectorAll('.language-text p, #character-info p').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Hide all language-specific headings
+                document.querySelectorAll('#language-recommendation h3').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show text for the detected language
+                const langElement = document.querySelector(`.lang-${languageCode}`);
+                if (langElement) {
+                    document.querySelectorAll(`.lang-${languageCode}`).forEach(el => {
+                        el.classList.add('active');
+                    });
+                } else {
+                    // Fallback to English if the language code isn't found
+                    document.querySelectorAll('.lang-en').forEach(el => {
+                        el.classList.add('active');
+                    });
+                    console.warn(`Language code '${languageCode}' not found. Falling back to English.`);
+                    return 'en';
+                }
+                return languageCode;
+            }
+            
+            // Update feedback button text based on current language
+            function updateFeedbackButton(languageCode) {
+                // Hide all language-specific text
+                document.querySelectorAll('.feedback-text').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Show text for the detected language
+                const langElement = document.querySelector(`.feedback-text.lang-${languageCode}`);
+                if (langElement) {
+                    langElement.classList.add('active');
+                } else {
+                    // Fallback to English if the language code isn't found
+                    document.querySelector('.feedback-text.lang-en').classList.add('active');
+                }
+            }
+            
+            // Find matching language
+            function getRecommendedLanguages(languageCode) {
+                const recommendations = [];
+                
+                // Check for exact match
+                const exactMatch = languages.find(lang => lang.code === languageCode);
+                if (exactMatch) {
+                    recommendations.push(exactMatch);
+                }
+                
+                // Add other languages for reference
+                const otherLangs = languages.filter(lang => lang.code !== languageCode);
+                recommendations.push(...otherLangs.slice(0, 3)); // Add up to 3 more languages
+                
+                return recommendations;
+            }
+            
+            // Display language recommendations
+            function displayRecommendations(recommendedLangs) {
+                const container = document.getElementById('language-recommendation');
+                const langsContainer = document.getElementById('recommended-langs');
+                
+                // Clear previous recommendations
+                langsContainer.innerHTML = '';
+                
+                // Add recommended language links
+                recommendedLangs.forEach(lang => {
+                    const link = document.createElement('a');
+                    link.href = lang.link;
+                    link.target = '_blank';
+                    link.className = 'recommended-lang';
+                    link.textContent = lang.name;
+                    
+                    // Add hover effect
+                    link.addEventListener('mouseenter', () => {
+                        link.style.background = 'rgba(255, 255, 255, 0.25)';
+                        link.style.transform = 'translateY(-3px)';
+                        link.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                    });
+                    
+                    link.addEventListener('mouseleave', () => {
+                        link.style.background = 'rgba(255, 255, 255, 0.15)';
+                        link.style.transform = 'translateY(0)';
+                        link.style.boxShadow = 'none';
+                    });
+                    
+                    langsContainer.appendChild(link);
+                });
+                
+                // Show the container with fade-in animation
+                container.style.opacity = '0';
+                container.style.transform = 'translateY(20px)';
+                container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                // Trigger animation after a small delay
+                setTimeout(() => {
+                    container.style.opacity = '1';
+                    container.style.transform = 'translateY(0)';
+                }, 100);
+            }
+            
+            // Validate language code
+            if (!languageCode || typeof languageCode !== 'string') {
+                console.error('Please provide a valid language code, e.g., switchLanguage("en")');
+                console.log('Available language codes:', languages.map(lang => lang.code).join(', '));
+                return;
+            }
+            
+            // Switch to the specified language
+            const actualLanguage = showLanguageText(languageCode);
+            updateFeedbackButton(actualLanguage);
+            
+            // Display recommendations including the selected language
+            const recommendedLangs = getRecommendedLanguages(actualLanguage);
+            displayRecommendations(recommendedLangs);
+            
+            // Show success message in console
+            const langName = languages.find(lang => lang.code === actualLanguage)?.name || 'English';
+            console.log(`Switched to ${langName} (${actualLanguage})`);
+            console.log('To switch language again, use: switchLanguage("code") where code is one of:', languages.map(lang => lang.code).join(', '));
+        };
+        
+        // Show console message with usage instructions
+        console.log('%c🔤 Language Debug Tool', 'font-weight: bold; color: #6366f1;');
+        console.log('Switch languages using: switchLanguage("code")');
+        console.log('Available codes: en, ja, zh-CN, zh-MY, zh-SG, zh-TW');
+        console.log('Example: switchLanguage("zh-CN")');
+        
+    </script>
     <script>
         /**
          * Main application script that works with the LanguageSelector class
@@ -347,6 +527,30 @@
             // Find matching language or fallback to Japanese/English
             function getRecommendedLanguages(browserLang) {
                 const recommendations = [];
+                
+                // 特殊处理中文语言代码
+                // If the browser language starts with 'zh-' but is not 'zh-tw', 'zh-hk' or 'zh-mo', use Simplified Chinese
+                if (browserLang.toLowerCase().startsWith('zh-')) {
+                    const zhVariants = ['zh-tw', 'zh-hk', 'zh-mo'];
+                    const lowerCaseBrowserLang = browserLang.toLowerCase();
+                    
+                    // 检查是否是繁体中文变体
+                    const isTraditionalVariant = zhVariants.some(variant => 
+                        lowerCaseBrowserLang === variant || lowerCaseBrowserLang.startsWith(variant + '-')
+                    );
+                    
+                    if (isTraditionalVariant) {
+                        // 使用繁体中文
+                        const zhTWLang = languages.find(lang => lang.code === 'zh-TW');
+                        if (zhTWLang) recommendations.push(zhTWLang);
+                    } else {
+                        // 其他所有中文变体都使用简体中文
+                        const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
+                        if (zhCNLang) recommendations.push(zhCNLang);
+                    }
+                    
+                    return recommendations;
+                }
                 
                 // Check for exact match
                 const exactMatch = languages.find(lang => lang.code === browserLang || lang.code.startsWith(browserLang + '-'));
@@ -428,6 +632,7 @@
                         
                         // Show Chinese text
                         showLanguageText('zh-CN');
+                        updateFeedbackButton('zh-CN');
                         
                         const link = document.createElement('a');
                         link.href = zhCNLang.link;
@@ -466,8 +671,9 @@
                     const recommendedLangs = getRecommendedLanguages(browserLang);
                     
                     // Show text for the most relevant language
-                    const primaryLang = recommendedLangs[0]?.code || 'en';
-                    showLanguageText(primaryLang);
+            const primaryLang = recommendedLangs[0]?.code || 'en';
+            showLanguageText(primaryLang);
+            updateFeedbackButton(primaryLang);
                     
                     // Display up to 4 recommended languages
                     displayRecommendations(recommendedLangs);
@@ -488,6 +694,7 @@
                 if (fallbackLangs.length > 0) {
                     // Show English text as fallback
                     showLanguageText('en');
+                    updateFeedbackButton('en');
                     displayRecommendations(fallbackLangs);
                 }
             }
