@@ -403,11 +403,71 @@ class LanguageSelector {
 document.addEventListener('DOMContentLoaded', async () => {
     const languageSelector = new LanguageSelector();
     
-    // Apply location-based language restrictions after initialization
-    try {
-        await languageSelector.applyLocationBasedLanguageRestrictions();
-    } catch (error) {
-        console.error('Error applying location-based restrictions:', error);
-        // Continue with default languages if there's an error
+    // Get stored test mode from localStorage
+    const storedTestMode = localStorage.getItem('languageTestMode');
+    
+    // Add debugging functionality to test different regions
+    window.testRegion = (regionType) => {
+        console.log(`Testing region: ${regionType}`);
+        
+        // Store the test mode in localStorage for persistence across page reloads
+        if (regionType === 'reset') {
+            localStorage.removeItem('languageTestMode');
+            console.log('Simulation reset: Using actual location detection');
+        } else {
+            localStorage.setItem('languageTestMode', regionType);
+            console.log(`Simulation: User is ${regionType === 'mainland-china' ? 'in' : 'outside'} Mainland China`);
+        }
+        
+        // Apply the test mode immediately
+        applyTestMode(regionType);
+    };
+    
+    // Function to apply test mode
+    function applyTestMode(regionType) {
+        // Store the original method for restoration
+        const originalCheckMethod = languageSelector.constructor.prototype.checkIfInMainlandChina;
+        
+        // Override the check method based on region type
+        if (regionType === 'mainland-china') {
+            languageSelector.checkIfInMainlandChina = async () => true;
+        } else if (regionType === 'outside-china') {
+            languageSelector.checkIfInMainlandChina = async () => false;
+        } else {
+            // Restore original method if region type is 'reset'
+            languageSelector.checkIfInMainlandChina = originalCheckMethod;
+        }
+        
+        // Reapply location-based restrictions with the new method
+        languageSelector.applyLocationBasedLanguageRestrictions().then(() => {
+            console.log('Region test completed. The test mode will persist even after page refresh.');
+        }).catch(error => {
+            console.error('Error during region test:', error);
+        });
     }
+    
+    // If there's a stored test mode, apply it before checking location
+    if (storedTestMode) {
+        console.log(`Restoring test mode: ${storedTestMode}`);
+        applyTestMode(storedTestMode);
+    } else {
+        // Apply location-based language restrictions as usual
+        try {
+            await languageSelector.applyLocationBasedLanguageRestrictions();
+        } catch (error) {
+            console.error('Error applying location-based restrictions:', error);
+            // Continue with default languages if there's an error
+        }
+    }
+    
+    // Make the language selector accessible globally for debugging
+    window.languageSelector = languageSelector;
+    
+    // Print debugging instructions to console
+    console.log('%cLanguage Selector Debugging Tools:', 'color: #6366f1; font-weight: bold;');
+    console.log('• testRegion(\'mainland-china\') - Simulate user in Mainland China');
+    console.log('• testRegion(\'outside-china\') - Simulate user outside Mainland China');
+    console.log('• testRegion(\'reset\') - Reset to use actual location detection');
+    console.log('• languageSelector - Access the language selector instance directly');
+    console.log('• Test mode will persist across page refresh');
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自介 Self Info-lang choose</title>
+    <title>Self Info - Language Choose</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -184,25 +184,46 @@
 </head>
 <body>
     <div class="glass-container">
-        <h1>自介 Self Info</h1>
-        <p>If this is not your preferred language, please click the top-right corner to select your desired language</p>
-        <p>これがあなたの希望する言語でない場合は、右上隅をクリックして希望の言語を選択してください</p>
-        <p>如果这不是你希望的语言，请点击右上角选择你希望的语言</p>
-        <p>如果這不是你希望的語言，請點擊右上角選擇你希望的語言</p>
+        <h1>Self Info - Language Choose</h1>
+        <!-- Language-specific text containers -->
+        <div id="language-text" class="language-text">
+            <p class="lang-en">If this is not your preferred language, please select your desired language from the top-right</p>
+            <p class="lang-ja">これがあなたの希望する言語でない場合は、右上から希望の言語を選択してください</p>
+            <p class="lang-zh-CN">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
+            <p class="lang-zh-TW">如果這不是你希望的語言，請從右上角選擇你希望的語言</p>
+        </div>
         
         <!-- This will be populated by the script with language recommendations -->
-        <div id="language-recommendation" class="language-recommendation hidden">
-            <h3>Recommended Language:</h3>
+        <div id="language-recommendation" class="language-recommendation">
+            <h3 class="lang-en">Recommended Language:</h3>
+            <h3 class="lang-ja hidden">推奨される言語：</h3>
+            <h3 class="lang-zh-CN hidden">推荐语言：</h3>
+            <h3 class="lang-zh-TW hidden">推薦語言：</h3>
             <div id="recommended-langs"></div>
         </div>
 
-    <div>
-        <p>月に寄りそう乙女の作法  ルナちょむ</p>
-        <p>近月少女的礼仪  樱小路露娜</p>
-        <p>近月少女的禮儀  櫻小路露娜</p>
-        <p>The Principle of Having an Elegance in the Moon  Luna Sakuragi</p>
-        <p>Pixiv ID | 133337546</p>
+    <div id="character-info">
+        <p class="lang-ja">月に寄りそう乙女の作法  ルナちょむ Pixiv ID | 133337546</p>
+        <p class="lang-zh-CN">近月少女的礼仪  樱小路露娜 Pixiv ID | 133337546</p>
+        <p class="lang-zh-TW">近月少女的禮儀  櫻小路露娜 Pixiv ID | 133337546</p>
+        <p class="lang-en">The Principle of Having an Elegance in the Moon  Luna Sakuragi Pixiv ID | 133337546</p>
     </div>
+    
+    <style>
+        .language-text p,
+        #character-info p {
+            display: none;
+        }
+        
+        .language-text p.active,
+        #character-info p.active {
+            display: block;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
 
     
     <button id="feedback-button" class="feedback-button">
@@ -272,6 +293,32 @@
                 { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
             ];
             
+            // Show only the text for the detected language
+            function showLanguageText(languageCode) {
+                // Hide all language-specific text
+                document.querySelectorAll('.language-text p, #character-info p').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Hide all language-specific headings
+                document.querySelectorAll('#language-recommendation h3').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show text for the detected language
+                const langElement = document.querySelector(`.lang-${languageCode}`);
+                if (langElement) {
+                    document.querySelectorAll(`.lang-${languageCode}`).forEach(el => {
+                        el.classList.add('active');
+                    });
+                } else {
+                    // Fallback to English if the language code isn't found
+                    document.querySelectorAll('.lang-en').forEach(el => {
+                        el.classList.add('active');
+                    });
+                }
+            }
+            
             // Check if user is in mainland China
             async function checkIfInMainlandChina() {
                 try {
@@ -294,7 +341,7 @@
             function getUserBrowserLanguage() {
                 // Get the browser's language preference
                 const browserLang = navigator.language || navigator.userLanguage;
-                return browserLang.split('-')[0]; // Get primary language code (e.g., 'en' from 'en-US')
+                return browserLang; // Return full language code (e.g., 'en-US')
             }
             
             // Find matching language or fallback to Japanese/English
@@ -327,8 +374,9 @@
                 // Clear previous recommendations
                 langsContainer.innerHTML = '';
                 
-                // Add recommended language links
-                recommendedLangs.forEach(lang => {
+                // Add recommended language links (max 4 languages)
+                const displayLangs = recommendedLangs.slice(0, 4);
+                displayLangs.forEach(lang => {
                     const link = document.createElement('a');
                     link.href = lang.link;
                     link.target = '_blank';
@@ -352,7 +400,6 @@
                 });
                 
                 // Show the container with fade-in animation
-                container.classList.remove('hidden');
                 container.style.opacity = '0';
                 container.style.transform = 'translateY(20px)';
                 container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -376,8 +423,11 @@
                         const container = document.getElementById('language-recommendation');
                         const langsContainer = document.getElementById('recommended-langs');
                         
-                        container.classList.remove('hidden');
-                        container.querySelector('h3').textContent = '根据您的位置，我们推荐：';
+                        // Update the heading text
+                        document.querySelector('.lang-zh-CN.hidden').textContent = '根据您的位置，我们推荐：';
+                        
+                        // Show Chinese text
+                        showLanguageText('zh-CN');
                         
                         const link = document.createElement('a');
                         link.href = zhCNLang.link;
@@ -414,6 +464,12 @@
                     // User is not in mainland China, proceed with normal language detection
                     const browserLang = getUserBrowserLanguage();
                     const recommendedLangs = getRecommendedLanguages(browserLang);
+                    
+                    // Show text for the most relevant language
+                    const primaryLang = recommendedLangs[0]?.code || 'en';
+                    showLanguageText(primaryLang);
+                    
+                    // Display up to 4 recommended languages
                     displayRecommendations(recommendedLangs);
                 }
             }
@@ -430,6 +486,8 @@
                 ].filter(Boolean);
                 
                 if (fallbackLangs.length > 0) {
+                    // Show English text as fallback
+                    showLanguageText('en');
                     displayRecommendations(fallbackLangs);
                 }
             }
