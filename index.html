@@ -196,9 +196,56 @@
             <div id="recommended-langs"></div>
         </div>
     
-    <footer>
-        <p>2025.9.21 chronie-shizutoki</p>
-    </footer>
+    <button id="feedback-button" class="feedback-button">
+        <i class="fas fa-comment-dots"></i> Feedback / フィードバック / 反馈 / 回饋
+    </button>
+    
+    <style>
+        /* Feedback button styles */
+        .feedback-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-family: system-ui, sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feedback-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Responsive styles for feedback button */
+        @media (max-width: 600px) {
+            .feedback-button {
+                padding: 10px 20px;
+                font-size: 14px;
+                bottom: 15px;
+            }
+        }
+    </style>
+    
+    <script>
+        // Add event listener to feedback button
+        document.getElementById('feedback-button').addEventListener('click', function() {
+            window.open('https://jyskyp4y.forms.app/untitled-form', '_blank');
+        });
+    </script>
     
     <script src="example.js"></script>
     <script>
