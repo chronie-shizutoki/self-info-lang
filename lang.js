@@ -60,13 +60,13 @@ class LanguageSelector {
         
         // Add hover effect
         button.addEventListener('mouseenter', () => {
-            button.style.background = 'rgba(255, 255, 255, 0.25)';
+            button.style.background = 'rgba(245, 81, 223, 0.25)';
             button.style.transform = 'translateY(-2px)';
             button.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.2)';
         });
         
         button.addEventListener('mouseleave', () => {
-            button.style.background = 'rgba(255, 255, 255, 0.15)';
+            button.style.background = 'rgba(245, 81, 223, 0.15)';
             button.style.transform = 'translateY(0)';
             button.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
         });
