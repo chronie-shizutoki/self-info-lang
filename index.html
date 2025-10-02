@@ -6,29 +6,17 @@
     <title>Self Info - Language Choose</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --text-color: #1e1d1d;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui , sans-serif;
+            font-family: system-ui, sans-serif;
         }
         
         body {
-            background: url('background.jpg') no-repeat center 20%;
-            background-size: cover;
-            color: var(--text-color);
+            background-color: #f5f5f5;
+            color: #333;
             min-height: 100vh;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -36,47 +24,25 @@
             padding: 20px;
         }
         
-        .glass-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .glass-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.45);
-        }
-        
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, #ffffff, #e2e8f0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: #333;
         }
         
         p {
             font-size: 1rem;
             margin-bottom: 30px;
-            line-height: 1;
+            line-height: 1.5;
+            text-align: center;
         }
         
         .language-recommendation {
             margin: 30px 0;
             padding: 20px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            background: #ffffff;
+            border: 1px solid #ddd;
         }
         
         .language-recommendation h3 {
@@ -86,104 +52,36 @@
         
         .recommended-lang {
             display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            background: rgba(245, 81, 223, 0.15);
-            border-radius: 25px;
+            margin: 8px;
+            padding: 10px 20px;
+            background: #6366f1;
+            border-radius: 4px;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #ddd;
         }
         
         .recommended-lang:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: bold;
+            background: #4f46e5;
         }
         
         footer {
             margin-top: 40px;
             padding: 20px;
             text-align: center;
-            opacity: 0.8;
             font-size: 0.9rem;
+            color: #666;
         }
         
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
-            
-            .glass-container {
-                padding: 30px 20px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Animation for floating elements */
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .float-animation:nth-child(2) {
-            animation-delay: 1s;
-        }
-        
-        .float-animation:nth-child(3) {
-            animation-delay: 2s;
         }
     </style>
 </head>
 <body>
-    <div class="glass-container">
+    <div>
         <h1>Self Info - Language Choose</h1>
         <!-- Language-specific text containers -->
         <div id="language-text" class="language-text">
@@ -205,30 +103,56 @@
             <h3 class="lang-zh-TW hidden">推薦語言：</h3>
             <div id="recommended-langs"></div>
         </div>
-
-    <div id="character-info">
-        <p class="lang-ja">月に寄りそう乙女の作法  ルナちょむ Pixiv ID | 133337546</p>
-        <p class="lang-zh-CN">近月少女的礼仪  樱小路露娜 Pixiv ID | 133337546</p>
-        <p class="lang-zh-TW">近月少女的禮儀  櫻小路露娜 Pixiv ID | 133337546</p>
-        <p class="lang-en">The Principle of Having an Elegance in the Moon  Luna Sakuragi Pixiv ID | 133337546</p>
-    </div>
     
     <style>
-        .language-text p,
-        #character-info p {
+        .language-text p {
             display: none;
         }
         
-        .language-text p.active,
-        #character-info p.active {
+        .language-text p.active {
             display: block;
         }
         
         .hidden {
             display: none;
         }
+        
+        /* Feedback button styles */
+        .feedback-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 4px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            color: #333;
+            font-family: system-ui, sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feedback-text {
+            display: none;
+        }
+        
+        .feedback-text.active {
+            display: inline;
+        }
+        
+        @media (max-width: 600px) {
+            .feedback-button {
+                padding: 8px 16px;
+                font-size: 14px;
+                bottom: 15px;
+            }
+        }
     </style>
-
     
     <!-- Feedback button with language-specific text -->
     <button id="feedback-button" class="feedback-button">
@@ -238,55 +162,6 @@
         <span class="feedback-text lang-zh-CN hidden">反馈</span>
         <span class="feedback-text lang-zh-TW hidden">回饋</span>
     </button>
-    
-    <style>
-        /* Feedback button styles */
-        .feedback-button {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 24px;
-            border-radius: 30px;
-            background: rgba(245, 81, 223, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            font-family: system-ui, sans-serif;
-            font-size: 16px;
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .feedback-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Feedback text styles */
-        .feedback-text {
-            display: none;
-        }
-        
-        .feedback-text.active {
-            display: inline;
-        }
-        
-        /* Responsive styles for feedback button */
-        @media (max-width: 600px) {
-            .feedback-button {
-                padding: 10px 20px;
-                font-size: 14px;
-                bottom: 15px;
-            }
-        }
-    </style>
     
     <script>
         // Add event listener to feedback button
@@ -330,7 +205,7 @@
             // Show only the text for the specified language
             function showLanguageText(languageCode) {
                 // Hide all language-specific text
-                document.querySelectorAll('.language-text p, #character-info p').forEach(el => {
+                document.querySelectorAll('.language-text p').forEach(el => {
                     el.classList.remove('active');
                 });
                 
@@ -406,32 +281,11 @@
                     link.className = 'recommended-lang';
                     link.textContent = lang.name;
                     
-                    // Add hover effect
-                    link.addEventListener('mouseenter', () => {
-                        link.style.background = 'rgba(255, 255, 255, 0.25)';
-                        link.style.transform = 'translateY(-3px)';
-                        link.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                    });
-                    
-                    link.addEventListener('mouseleave', () => {
-                        link.style.background = 'rgba(255, 255, 255, 0.15)';
-                        link.style.transform = 'translateY(0)';
-                        link.style.boxShadow = 'none';
-                    });
-                    
                     langsContainer.appendChild(link);
                 });
                 
-                // Show the container with fade-in animation
-                container.style.opacity = '0';
-                container.style.transform = 'translateY(20px)';
-                container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                
-                // Trigger animation after a small delay
-                setTimeout(() => {
-                    container.style.opacity = '1';
-                    container.style.transform = 'translateY(0)';
-                }, 100);
+                // Show the container
+                container.style.display = 'block';
             }
             
             // Validate language code
@@ -456,7 +310,7 @@
         };
         
         // Show console message with usage instructions
-        console.log('%c🔤 Language Debug Tool', 'font-weight: bold; color: #6366f1;');
+        console.log('Language Debug Tool');
         console.log('Switch languages using: switchLanguage("code")');
         console.log('Available codes: en, ja, zh-CN, zh-MY, zh-SG, zh-TW');
         console.log('Example: switchLanguage("zh-CN")');
@@ -480,7 +334,7 @@
             // Show only the text for the detected language
             function showLanguageText(languageCode) {
                 // Hide all language-specific text
-                document.querySelectorAll('.language-text p, #character-info p').forEach(el => {
+                document.querySelectorAll('.language-text p').forEach(el => {
                     el.classList.remove('active');
                 });
                 
@@ -524,31 +378,29 @@
             // Get user's browser language
             function getUserBrowserLanguage() {
                 // Get the browser's language preference
-                const browserLang = navigator.language || navigator.userLanguage;
-                return browserLang; // Return full language code (e.g., 'en-US')
+                return navigator.language || navigator.userLanguage; // Return full language code (e.g., 'en-US')
             }
             
             // Find matching language or fallback to Japanese/English
             function getRecommendedLanguages(browserLang) {
                 const recommendations = [];
                 
-                // 特殊处理中文语言代码
-                // If the browser language starts with 'zh-' but is not 'zh-tw', 'zh-hk' or 'zh-mo', use Simplified Chinese
+                // Special handling for Chinese language codes
                 if (browserLang.toLowerCase().startsWith('zh-')) {
                     const zhVariants = ['zh-tw', 'zh-hk', 'zh-mo'];
                     const lowerCaseBrowserLang = browserLang.toLowerCase();
                     
-                    // 检查是否是繁体中文变体
+                    // Check if it's a traditional Chinese variant
                     const isTraditionalVariant = zhVariants.some(variant => 
                         lowerCaseBrowserLang === variant || lowerCaseBrowserLang.startsWith(variant + '-')
                     );
                     
                     if (isTraditionalVariant) {
-                        // 使用繁体中文
+                        // Use Traditional Chinese
                         const zhTWLang = languages.find(lang => lang.code === 'zh-TW');
                         if (zhTWLang) recommendations.push(zhTWLang);
                     } else {
-                        // 其他所有中文变体都使用简体中文
+                        // Use Simplified Chinese for all other Chinese variants
                         const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
                         if (zhCNLang) recommendations.push(zhCNLang);
                     }
@@ -591,32 +443,11 @@
                     link.className = 'recommended-lang';
                     link.textContent = lang.name;
                     
-                    // Add hover effect
-                    link.addEventListener('mouseenter', () => {
-                        link.style.background = 'rgba(255, 255, 255, 0.25)';
-                        link.style.transform = 'translateY(-3px)';
-                        link.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                    });
-                    
-                    link.addEventListener('mouseleave', () => {
-                        link.style.background = 'rgba(255, 255, 255, 0.15)';
-                        link.style.transform = 'translateY(0)';
-                        link.style.boxShadow = 'none';
-                    });
-                    
                     langsContainer.appendChild(link);
                 });
                 
-                // Show the container with fade-in animation
-                container.style.opacity = '0';
-                container.style.transform = 'translateY(20px)';
-                container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                
-                // Trigger animation after a small delay
-                setTimeout(() => {
-                    container.style.opacity = '1';
-                    container.style.transform = 'translateY(0)';
-                }, 100);
+                // Show the container
+                container.style.display = 'block';
             }
             
             // Main function to handle language recommendation and location check
@@ -644,30 +475,10 @@
                         link.className = 'recommended-lang';
                         link.textContent = zhCNLang.name;
                         
-                        // Add hover effect
-                        link.addEventListener('mouseenter', () => {
-                            link.style.background = 'rgba(255, 255, 255, 0.25)';
-                            link.style.transform = 'translateY(-3px)';
-                            link.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                        });
-                        
-                        link.addEventListener('mouseleave', () => {
-                            link.style.background = 'rgba(255, 255, 255, 0.15)';
-                            link.style.transform = 'translateY(0)';
-                            link.style.boxShadow = 'none';
-                        });
-                        
                         langsContainer.appendChild(link);
                         
-                        // Add fade-in animation
-                        container.style.opacity = '0';
-                        container.style.transform = 'translateY(20px)';
-                        container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                        
-                        setTimeout(() => {
-                            container.style.opacity = '1';
-                            container.style.transform = 'translateY(0)';
-                        }, 100);
+                        // Show the container
+                        container.style.display = 'block';
                     }
                 } else {
                     // User is not in mainland China, proceed with normal language detection
@@ -675,9 +486,9 @@
                     const recommendedLangs = getRecommendedLanguages(browserLang);
                     
                     // Show text for the most relevant language
-            const primaryLang = recommendedLangs[0]?.code || 'en';
-            showLanguageText(primaryLang);
-            updateFeedbackButton(primaryLang);
+                    const primaryLang = recommendedLangs[0]?.code || 'en';
+                    showLanguageText(primaryLang);
+                    updateFeedbackButton(primaryLang);
                     
                     // Display up to 4 recommended languages
                     displayRecommendations(recommendedLangs);

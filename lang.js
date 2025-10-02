@@ -41,35 +41,19 @@ class LanguageSelector {
         button.className = 'language-button';
         button.innerHTML = '🌐 Language';
         
-        // Style the button to match the glass effect theme
+        // Simplified button style
         button.style.position = 'fixed';
         button.style.top = '20px';
         button.style.right = '20px';
-        button.style.padding = '12px 24px';
-        button.style.borderRadius = '30px';
-        button.style.background = 'rgba(255, 255, 255, 0.15)';
-        button.style.backdropFilter = 'blur(10px)';
-        button.style.border = '1px solid rgba(255, 255, 255, 0.3)';
-        button.style.color = '#ffffff';
+        button.style.padding = '10px 20px';
+        button.style.borderRadius = '4px';
+        button.style.backgroundColor = 'white';
+        button.style.border = '1px solid #ccc';
+        button.style.color = 'black';
         button.style.fontFamily = 'system-ui, sans-serif';
         button.style.fontSize = '16px';
         button.style.cursor = 'pointer';
         button.style.zIndex = '1000';
-        button.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-        button.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-        
-        // Add hover effect
-        button.addEventListener('mouseenter', () => {
-            button.style.background = 'rgba(245, 81, 223, 0.25)';
-            button.style.transform = 'translateY(-2px)';
-            button.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.2)';
-        });
-        
-        button.addEventListener('mouseleave', () => {
-            button.style.background = 'rgba(245, 81, 223, 0.15)';
-            button.style.transform = 'translateY(0)';
-            button.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-        });
         
         // Add touch feedback for mobile devices
         button.style.touchAction = 'manipulation';
@@ -80,7 +64,7 @@ class LanguageSelector {
         style.textContent = `
             @media (max-width: 600px) {
                 #language-button {
-                    padding: 10px 20px !important;
+                    padding: 8px 16px !important;
                     font-size: 14px !important;
                     top: 15px !important;
                     right: 15px !important;
@@ -101,50 +85,21 @@ class LanguageSelector {
         popup.id = 'language-popup';
         popup.className = 'language-popup hidden';
         
-        // Style the popup with enhanced glass effect
+        // Simplified style using browser defaults
         popup.style.position = 'fixed';
         popup.style.top = '80px';
         popup.style.right = '20px';
         popup.style.width = '280px';
         popup.style.maxWidth = '90vw';
         popup.style.maxHeight = '70vh'; // Limit height for mobile devices
-        popup.style.padding = '24px';
-        popup.style.borderRadius = '28px';
-        popup.style.background = 'rgba(255, 255, 255, 0.15)';
-        popup.style.backdropFilter = 'blur(6px) saturate(180%)';
-        popup.style.border = '1px solid rgba(255, 255, 255, 0.2)';
-        popup.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.25)';
+        popup.style.padding = '10px';
+        popup.style.backgroundColor = 'white';
+        popup.style.border = '1px solid #ccc';
         popup.style.zIndex = '1001';
         popup.style.opacity = '0';
-        popup.style.transition = 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        popup.style.transform = 'translateY(-15px) scale(0.95)';
-        popup.style.display = 'flex';
-        popup.style.flexDirection = 'column';
-        popup.style.gap = '12px';
+        popup.style.transition = 'opacity 0.2s ease';
+        popup.style.display = 'none';
         popup.style.overflowY = 'auto'; // Enable vertical scrolling
-        
-        // Add custom scrollbar for the popup
-        const scrollbarStyle = document.createElement('style');
-        scrollbarStyle.textContent = `
-            #language-popup::-webkit-scrollbar {
-                width: 6px;
-            }
-            
-            #language-popup::-webkit-scrollbar-track {
-                background: rgba(255, 255, 255, 0.05);
-                border-radius: 10px;
-            }
-            
-            #language-popup::-webkit-scrollbar-thumb {
-                background: rgba(255, 255, 255, 0.3);
-                border-radius: 10px;
-            }
-            
-            #language-popup::-webkit-scrollbar-thumb:hover {
-                background: rgba(255, 255, 255, 0.4);
-            }
-        `;
-        document.head.appendChild(scrollbarStyle);
         
         // Add languages to the popup
         this.languages.forEach(lang => {
@@ -153,47 +108,19 @@ class LanguageSelector {
             languageItem.target = '_blank';
             languageItem.className = 'language-item';
             
-            // Style the language item
+            // Simplified style using browser defaults
             languageItem.style.display = 'block';
-            languageItem.style.padding = '14px 18px';
-            languageItem.style.borderRadius = '16px';
-            languageItem.style.background = 'rgba(255, 255, 255, 0.08)';
-            languageItem.style.color = '#ffffff';
+            languageItem.style.padding = '8px 12px';
+            languageItem.style.color = 'black';
             languageItem.style.textDecoration = 'none';
-            languageItem.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             languageItem.style.whiteSpace = 'nowrap';
             languageItem.style.overflow = 'hidden';
             languageItem.style.textOverflow = 'ellipsis';
-            languageItem.style.fontFamily = 'Segoe UI, system-ui, sans-serif';
             
-            // Add hover effect for desktop
-            languageItem.addEventListener('mouseenter', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.2)';
-                languageItem.style.transform = 'translateX(8px)';
-                languageItem.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            });
-            
-            languageItem.addEventListener('mouseleave', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.08)';
-                languageItem.style.transform = 'translateX(0)';
-                languageItem.style.boxShadow = 'none';
-            });
-            
-            // Add touch effect for mobile
-            languageItem.addEventListener('touchstart', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.2)';
-                languageItem.style.transform = 'translateX(8px)';
-            });
-            
-            languageItem.addEventListener('touchend', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.08)';
-                languageItem.style.transform = 'translateX(0)';
-            });
-            
-            // Add language names with better typography
+            // Add language names with simplified typography
             languageItem.innerHTML = `
-                <div style="font-weight: 600; margin-bottom: 3px; font-size: 16px;">${lang.name}</div>
-                <div style="font-size: 13px; opacity: 0.8; font-weight: 300;">${lang.localName}</div>
+                <div style="font-weight: 600;">${lang.name}</div>
+                <div style="font-size: 13px; opacity: 0.8;">${lang.localName}</div>
             `;
             
             popup.appendChild(languageItem);
@@ -203,7 +130,7 @@ class LanguageSelector {
         const header = document.createElement('div');
         header.style.fontSize = '18px';
         header.style.fontWeight = 'bold';
-        header.style.marginBottom = '16px';
+        header.style.marginBottom = '10px';
         header.style.textAlign = 'center';
         header.textContent = 'Select Language';
         
@@ -238,13 +165,6 @@ class LanguageSelector {
             }
         });
         
-        // Add animation for showing/hiding
-        this.popup.addEventListener('transitionend', () => {
-            if (this.popup.classList.contains('hidden')) {
-                this.popup.style.display = 'none';
-            }
-        });
-        
         // Make popup accessible by keyboard navigation
         this.button.setAttribute('aria-haspopup', 'true');
         this.button.setAttribute('aria-expanded', 'false');
@@ -266,22 +186,17 @@ class LanguageSelector {
      */
     showPopup() {
         this.popup.classList.remove('hidden');
-        this.popup.style.display = 'flex';
+        this.popup.style.display = 'block';
         
-        // Trigger reflow before animating
-        void this.popup.offsetWidth;
+        // Apply simple fade-in effect
+        setTimeout(() => {
+            this.popup.style.opacity = '1';
+        }, 10);
         
-        // Apply animations
-        this.popup.style.opacity = '1';
-        this.popup.style.transform = 'translateY(0) scale(1)';
         this.button.setAttribute('aria-expanded', 'true');
         
         // Prevent body from scrolling when popup is open
         document.body.style.overflow = 'hidden';
-        
-        // Add button animation
-        this.button.style.transform = 'scale(1.05)';
-        this.button.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.25)';
     }
     
     /**
@@ -289,16 +204,17 @@ class LanguageSelector {
      */
     hidePopup() {
         this.popup.style.opacity = '0';
-        this.popup.style.transform = 'translateY(-15px) scale(0.95)';
-        this.popup.classList.add('hidden');
+        
+        // Hide after fade-out animation completes
+        setTimeout(() => {
+            this.popup.classList.add('hidden');
+            this.popup.style.display = 'none';
+        }, 200);
+        
         this.button.setAttribute('aria-expanded', 'false');
         
         // Allow body to scroll again when popup is closed
         document.body.style.overflow = '';
-        
-        // Reset button animation
-        this.button.style.transform = 'scale(1)';
-        this.button.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
     }
     
     /**
@@ -362,36 +278,19 @@ class LanguageSelector {
             languageItem.target = '_blank';
             languageItem.className = 'language-item';
             
-            // Apply styling
+            // Simplified style using browser defaults
             languageItem.style.display = 'block';
-            languageItem.style.padding = '14px 18px';
-            languageItem.style.borderRadius = '16px';
-            languageItem.style.background = 'rgba(255, 255, 255, 0.08)';
-            languageItem.style.color = '#ffffff';
+            languageItem.style.padding = '8px 12px';
+            languageItem.style.color = 'black';
             languageItem.style.textDecoration = 'none';
-            languageItem.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             languageItem.style.whiteSpace = 'nowrap';
             languageItem.style.overflow = 'hidden';
             languageItem.style.textOverflow = 'ellipsis';
-            languageItem.style.fontFamily = 'Segoe UI, system-ui, sans-serif';
             
-            // Add hover effects
-            languageItem.addEventListener('mouseenter', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.2)';
-                languageItem.style.transform = 'translateX(8px)';
-                languageItem.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            });
-            
-            languageItem.addEventListener('mouseleave', () => {
-                languageItem.style.background = 'rgba(255, 255, 255, 0.08)';
-                languageItem.style.transform = 'translateX(0)';
-                languageItem.style.boxShadow = 'none';
-            });
-            
-            // Add language names
+            // Add language names with simplified typography
             languageItem.innerHTML = `
-                <div style="font-weight: 600; margin-bottom: 3px; font-size: 16px;">${lang.name}</div>
-                <div style="font-size: 13px; opacity: 0.8; font-weight: 300;">${lang.localName}</div>
+                <div style="font-weight: 600;">${lang.name}</div>
+                <div style="font-size: 13px; opacity: 0.8;">${lang.localName}</div>
             `;
             
             this.popup.appendChild(languageItem);
