@@ -41,37 +41,9 @@ class LanguageSelector {
         button.className = 'language-button';
         button.innerHTML = '🌐 Language';
         
-        // Simplified button style
-        button.style.position = 'fixed';
-        button.style.top = '20px';
-        button.style.right = '20px';
-        button.style.padding = '10px 20px';
-        button.style.borderRadius = '4px';
-        button.style.backgroundColor = 'white';
-        button.style.border = '1px solid #ccc';
-        button.style.color = 'black';
-        button.style.fontFamily = 'system-ui, sans-serif';
-        button.style.fontSize = '16px';
-        button.style.cursor = 'pointer';
-        button.style.zIndex = '1000';
-        
         // Add touch feedback for mobile devices
         button.style.touchAction = 'manipulation';
         button.style.webkitTapHighlightColor = 'transparent';
-        
-        // Add media query for mobile devices
-        const style = document.createElement('style');
-        style.textContent = `
-            @media (max-width: 600px) {
-                #language-button {
-                    padding: 8px 16px !important;
-                    font-size: 14px !important;
-                    top: 15px !important;
-                    right: 15px !important;
-                }
-            }
-        `;
-        document.head.appendChild(style);
         
         document.body.appendChild(button);
         this.button = button;
@@ -85,22 +57,6 @@ class LanguageSelector {
         popup.id = 'language-popup';
         popup.className = 'language-popup hidden';
         
-        // Simplified style using browser defaults
-        popup.style.position = 'fixed';
-        popup.style.top = '80px';
-        popup.style.right = '20px';
-        popup.style.width = '280px';
-        popup.style.maxWidth = '90vw';
-        popup.style.maxHeight = '70vh'; // Limit height for mobile devices
-        popup.style.padding = '10px';
-        popup.style.backgroundColor = 'white';
-        popup.style.border = '1px solid #ccc';
-        popup.style.zIndex = '1001';
-        popup.style.opacity = '0';
-        popup.style.transition = 'opacity 0.2s ease';
-        popup.style.display = 'none';
-        popup.style.overflowY = 'auto'; // Enable vertical scrolling
-        
         // Add languages to the popup
         this.languages.forEach(lang => {
             const languageItem = document.createElement('a');
@@ -108,19 +64,10 @@ class LanguageSelector {
             languageItem.target = '_blank';
             languageItem.className = 'language-item';
             
-            // Simplified style using browser defaults
-            languageItem.style.display = 'block';
-            languageItem.style.padding = '8px 12px';
-            languageItem.style.color = 'black';
-            languageItem.style.textDecoration = 'none';
-            languageItem.style.whiteSpace = 'nowrap';
-            languageItem.style.overflow = 'hidden';
-            languageItem.style.textOverflow = 'ellipsis';
-            
             // Add language names with simplified typography
             languageItem.innerHTML = `
-                <div style="font-weight: 600;">${lang.name}</div>
-                <div style="font-size: 13px; opacity: 0.8;">${lang.localName}</div>
+                <div class="language-name">${lang.name}</div>
+                <div class="language-local-name">${lang.localName}</div>
             `;
             
             popup.appendChild(languageItem);
@@ -128,10 +75,7 @@ class LanguageSelector {
         
         // Add a header to the popup
         const header = document.createElement('div');
-        header.style.fontSize = '18px';
-        header.style.fontWeight = 'bold';
-        header.style.marginBottom = '10px';
-        header.style.textAlign = 'center';
+        header.className = 'popup-header';
         header.textContent = 'Select Language';
         
         // Insert header at the beginning of the popup
@@ -186,11 +130,10 @@ class LanguageSelector {
      */
     showPopup() {
         this.popup.classList.remove('hidden');
-        this.popup.style.display = 'block';
         
-        // Apply simple fade-in effect
+        // Apply fade-in effect through CSS
         setTimeout(() => {
-            this.popup.style.opacity = '1';
+            this.popup.classList.add('visible');
         }, 10);
         
         this.button.setAttribute('aria-expanded', 'true');
@@ -203,12 +146,11 @@ class LanguageSelector {
      * Hides the language popup with enhanced animation.
      */
     hidePopup() {
-        this.popup.style.opacity = '0';
+        this.popup.classList.remove('visible');
         
         // Hide after fade-out animation completes
         setTimeout(() => {
             this.popup.classList.add('hidden');
-            this.popup.style.display = 'none';
         }, 200);
         
         this.button.setAttribute('aria-expanded', 'false');
@@ -263,7 +205,7 @@ class LanguageSelector {
      */
     updateLanguagePopup() {
         // Clear existing language items except header
-        const header = this.popup.querySelector('div:first-child');
+        const header = this.popup.querySelector('.popup-header');
         this.popup.innerHTML = '';
         
         // Re-add header
@@ -278,19 +220,10 @@ class LanguageSelector {
             languageItem.target = '_blank';
             languageItem.className = 'language-item';
             
-            // Simplified style using browser defaults
-            languageItem.style.display = 'block';
-            languageItem.style.padding = '8px 12px';
-            languageItem.style.color = 'black';
-            languageItem.style.textDecoration = 'none';
-            languageItem.style.whiteSpace = 'nowrap';
-            languageItem.style.overflow = 'hidden';
-            languageItem.style.textOverflow = 'ellipsis';
-            
             // Add language names with simplified typography
             languageItem.innerHTML = `
-                <div style="font-weight: 600;">${lang.name}</div>
-                <div style="font-size: 13px; opacity: 0.8;">${lang.localName}</div>
+                <div class="language-name">${lang.name}</div>
+                <div class="language-local-name">${lang.localName}</div>
             `;
             
             this.popup.appendChild(languageItem);
