@@ -8,7 +8,7 @@ class LanguageSelector {
         this.languages = [
             { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
             { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
-            { code: 'zh-CN', name: '简体中文（中国大陆）', localName: 'Simplified Chinese (China)', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
+            { code: 'zh-CN', name: '中国大陆', localName: 'China Mainland', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
             { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese(SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
             { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
         ];
