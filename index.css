@@ -147,7 +147,7 @@
         .feedback-button {
             position: fixed;
             bottom: 20px;
-            left: 50%;
+            left: 70%;
             transform: translateX(-50%);
             padding: 12px 24px;
             border-radius: 12px;
@@ -179,6 +179,54 @@
         }
         
         .feedback-text.active {
+            display: inline;
+        }
+
+        /* changelog button related styles */
+        .changelog-text {
+            display: none;
+        }
+        
+        .changelog-text.active {
+            display: inline;
+        }
+        
+        /* Changelog Button Styles */
+        .changelog-button {
+            position: fixed;
+            bottom: 20px;
+            left: 30%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-family: system-ui, sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+            min-height: 48px;
+            min-width: 100px;
+            width: auto;
+        }
+        
+        .changelog-button:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+        
+        .changelog-text {
+            display: none;
+        }
+        
+        .changelog-text.active {
             display: inline;
         }
         
