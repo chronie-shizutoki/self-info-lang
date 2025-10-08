@@ -394,7 +394,7 @@ h1 {
 .feedback-button {
     position: fixed;
     bottom: 30px;
-    left: 50%;
+    left: 70%;
     transform: translateX(-50%);
     padding: 1rem 2rem;
     background: var(--accent-color);
@@ -416,7 +416,55 @@ h1 {
     -webkit-backdrop-filter: blur(12px);
 }
 
-.feedback-button:hover {
+/* 更新日志按钮 */
+.changelog-button {
+    position: fixed;
+    bottom: 30px;
+    left: 30%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    background: var(--container-bg);
+    border: 1px solid var(--container-border);
+    border-radius: 28px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.changelog-button:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-color);
+}
+
+.changelog-button:active {
+    transform: translateX(-50%) translateY(-1px) scale(0.98);
+}
+
+.changelog-text {
+    display: none;
+}
+
+.changelog-text.active {
+    display: inline;
+}
+
+  .feedback-button:hover {
     background: var(--accent-hover);
     transform: translateX(-50%) translateY(-4px);
     box-shadow: 
@@ -489,6 +537,12 @@ h1 {
         font-size: 0.9rem;
     }
     
+    .changelog-button {
+        bottom: 20px;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
     .recommended-lang {
         width: 100%;
         margin: 0.75rem 0;
@@ -550,6 +604,12 @@ h1 {
         font-size: 0.8rem;
     }
     
+    .changelog-button {
+        bottom: 15px;
+        padding: 0.6rem 1.25rem;
+        font-size: 0.8rem;
+    }
+    
     .recommended-lang {
         padding: 1rem 1.5rem;
         font-size: 1rem;
@@ -568,6 +628,7 @@ h1 {
 @media (hover: none) and (pointer: coarse) {
     .language-button,
     .feedback-button,
+    .changelog-button,
     .recommended-lang,
     .language-item {
         min-height: 48px;

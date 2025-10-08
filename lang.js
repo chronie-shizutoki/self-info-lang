@@ -434,6 +434,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelector('.feedback-text.lang-en').classList.add('active');
         }
         
+        // Update changelog button
+        document.querySelectorAll('.changelog-text').forEach(el => {
+            el.classList.remove('active');
+        });
+        const changelogElement = document.querySelector(`.changelog-text.lang-${detectedLanguage}`);
+        if (changelogElement) {
+            changelogElement.classList.add('active');
+        } else {
+            document.querySelector('.changelog-text.lang-en').classList.add('active');
+        }
+        
         // Display recommendations
         const langsContainer = document.getElementById('recommended-langs');
         if (langsContainer) {

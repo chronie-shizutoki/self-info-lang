@@ -45,10 +45,10 @@
     <!-- Changelog button with language-specific text -->
     <button id="changelog-button" class="changelog-button">
         <i class="fas fa-history"></i>
-        <span class="feedback-text lang-en">Changelog</span>
-        <span class="feedback-text lang-ja hidden">更新履歴</span>
-        <span class="feedback-text lang-zh-CN hidden">更新记录</span>
-        <span class="feedback-text lang-zh-TW hidden">更新記錄</span>
+        <span class="changelog-text lang-en">Changelog</span>
+        <span class="changelog-text lang-ja hidden">更新履歴</span>
+        <span class="changelog-text lang-zh-CN hidden">更新记录</span>
+        <span class="changelog-text lang-zh-TW hidden">更新記錄</span>
     </button>
     
     <script>
@@ -65,17 +65,26 @@
         // Function to update button text based on current language
         function updateButtonText(languageCode) {
             // Hide all language-specific text
-            document.querySelectorAll('.feedback-text').forEach(el => {
+            document.querySelectorAll('.feedback-text, .changelog-text').forEach(el => {
                 el.classList.remove('active');
             });
             
             // Show text for the detected language
-            const langElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
-            if (langElements.length > 0) {
-                langElements.forEach(el => el.classList.add('active'));
+            const feedbackElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
+            const changelogElements = document.querySelectorAll(`.changelog-text.lang-${languageCode}`);
+            
+            if (feedbackElements.length > 0) {
+                feedbackElements.forEach(el => el.classList.add('active'));
             } else {
                 // Fallback to English if the language code isn't found
                 document.querySelectorAll('.feedback-text.lang-en').forEach(el => el.classList.add('active'));
+            }
+            
+            if (changelogElements.length > 0) {
+                changelogElements.forEach(el => el.classList.add('active'));
+            } else {
+                // Fallback to English if the language code isn't found
+                document.querySelectorAll('.changelog-text.lang-en').forEach(el => el.classList.add('active'));
             }
         }
         
@@ -134,17 +143,26 @@
             // Update button text based on current language
             function updateFeedbackButton(languageCode) {
                 // Hide all language-specific text
-                document.querySelectorAll('.feedback-text').forEach(el => {
+                document.querySelectorAll('.feedback-text, .changelog-text').forEach(el => {
                     el.classList.remove('active');
                 });
                 
                 // Show text for the detected language
-                const langElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
-                if (langElements.length > 0) {
-                    langElements.forEach(el => el.classList.add('active'));
+                const feedbackElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
+                const changelogElements = document.querySelectorAll(`.changelog-text.lang-${languageCode}`);
+                
+                if (feedbackElements.length > 0) {
+                    feedbackElements.forEach(el => el.classList.add('active'));
                 } else {
                     // Fallback to English if the language code isn't found
                     document.querySelectorAll('.feedback-text.lang-en').forEach(el => el.classList.add('active'));
+                }
+                
+                if (changelogElements.length > 0) {
+                    changelogElements.forEach(el => el.classList.add('active'));
+                } else {
+                    // Fallback to English if the language code isn't found
+                    document.querySelectorAll('.changelog-text.lang-en').forEach(el => el.classList.add('active'));
                 }
             }
             
