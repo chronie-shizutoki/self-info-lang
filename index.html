@@ -41,28 +41,47 @@
         <span class="feedback-text lang-zh-Hans hidden">反馈</span>
         <span class="feedback-text lang-zh-TW hidden">回饋</span>
     </button>
+
+    <!-- Changelog button with language-specific text -->
+    <button id="changelog-button" class="changelog-button">
+        <i class="fas fa-history"></i>
+        <span class="feedback-text lang-en">Changelog</span>
+        <span class="feedback-text lang-ja hidden">更新履歴</span>
+        <span class="feedback-text lang-zh-CN hidden">更新记录</span>
+        <span class="feedback-text lang-zh-TW hidden">更新記錄</span>
+    </button>
     
     <script>
         // Add event listener to feedback button
         document.getElementById('feedback-button').addEventListener('click', function() {
             window.open('https://jyskyp4y.forms.app/untitled-form', '_blank');
         });
+
+        // Add event listener to changelog button
+        document.getElementById('changelog-button').addEventListener('click', function() {
+            window.open('https://changelog-viewer.netlify.app/', '_blank');
+        });
         
-        // Function to update feedback button text based on current language
-        function updateFeedbackButton(languageCode) {
+        // Function to update button text based on current language
+        function updateButtonText(languageCode) {
             // Hide all language-specific text
             document.querySelectorAll('.feedback-text').forEach(el => {
                 el.classList.remove('active');
             });
             
             // Show text for the detected language
-            const langElement = document.querySelector(`.feedback-text.lang-${languageCode}`);
-            if (langElement) {
-                langElement.classList.add('active');
+            const langElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
+            if (langElements.length > 0) {
+                langElements.forEach(el => el.classList.add('active'));
             } else {
                 // Fallback to English if the language code isn't found
-                document.querySelector('.feedback-text.lang-en').classList.add('active');
+                document.querySelectorAll('.feedback-text.lang-en').forEach(el => el.classList.add('active'));
             }
+        }
+        
+        // Rename function for backward compatibility
+        function updateFeedbackButton(languageCode) {
+            updateButtonText(languageCode);
         }
     </script>
     
@@ -112,7 +131,7 @@
                 return languageCode;
             }
             
-            // Update feedback button text based on current language
+            // Update button text based on current language
             function updateFeedbackButton(languageCode) {
                 // Hide all language-specific text
                 document.querySelectorAll('.feedback-text').forEach(el => {
@@ -120,12 +139,12 @@
                 });
                 
                 // Show text for the detected language
-                const langElement = document.querySelector(`.feedback-text.lang-${languageCode}`);
-                if (langElement) {
-                    langElement.classList.add('active');
+                const langElements = document.querySelectorAll(`.feedback-text.lang-${languageCode}`);
+                if (langElements.length > 0) {
+                    langElements.forEach(el => el.classList.add('active'));
                 } else {
                     // Fallback to English if the language code isn't found
-                    document.querySelector('.feedback-text.lang-en').classList.add('active');
+                    document.querySelectorAll('.feedback-text.lang-en').forEach(el => el.classList.add('active'));
                 }
             }
             
