@@ -3,35 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self Info</title>
+    <title>Self Info - Language Selection</title>
+    <meta name="description" content="Choose your preferred language for Self Info website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div>
+    <div class="glass-container">
         <h1>Language Choose</h1>
+        
         <!-- Language-specific text containers -->
         <div id="language-text" class="language-text">
             <p class="lang-en">If this is not your preferred language, please select your desired language from the top-right</p>
             <p class="lang-ja">これがあなたの希望する言語でない場合は、右上から希望の言語を選択してください</p>
             <p class="lang-zh-CN">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
-            <p class="lang-zh-MY">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
-            <p class="lang-zh-SG">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
+            <p class="lang-zh-Hans">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
             <p class="lang-zh-TW">如果這不是你希望的語言，請從右上角選擇你希望的語言</p>
         </div>
         
-        <!-- This will be populated by the script with language recommendations -->
-        <div id="language-recommendation" class="language-recommendation">
+        <!-- Language recommendations container -->
+        <div id="language-recommendation" class="language-recommendation glass-container">
             <h3 class="lang-en">Recommended Language:</h3>
             <h3 class="lang-ja hidden">推奨される言語：</h3>
             <h3 class="lang-zh-CN hidden">推荐语言：</h3>
-            <h3 class="lang-zh-MY hidden">推荐语言：</h3>
-            <h3 class="lang-zh-SG hidden">推荐语言：</h3>
+            <h3 class="lang-zh-Hans hidden">推荐语言：</h3>
             <h3 class="lang-zh-TW hidden">推薦語言：</h3>
             <div id="recommended-langs"></div>
         </div>
-    
-    <!-- 样式已移至index.css文件中 -->
+    </div>
     
     <!-- Feedback button with language-specific text -->
     <button id="feedback-button" class="feedback-button">
@@ -39,6 +38,7 @@
         <span class="feedback-text lang-en">Feedback</span>
         <span class="feedback-text lang-ja hidden">フィードバック</span>
         <span class="feedback-text lang-zh-CN hidden">反馈</span>
+        <span class="feedback-text lang-zh-Hans hidden">反馈</span>
         <span class="feedback-text lang-zh-TW hidden">回饋</span>
     </button>
 
@@ -86,6 +86,7 @@
     </script>
     
     <script src="lang.js"></script>
+    
     <!-- Global debug function for switching language via console -->
     <script>
         // Make this function available in global scope
@@ -95,7 +96,7 @@
                 { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
                 { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
                 { code: 'zh-CN', name: '中国大陆', localName: 'China Mainland', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
-                { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese(SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
+                { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese (SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
                 { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
             ];
             
@@ -116,11 +117,13 @@
                 if (langElement) {
                     document.querySelectorAll(`.lang-${languageCode}`).forEach(el => {
                         el.classList.add('active');
+                        el.classList.remove('hidden');
                     });
                 } else {
                     // Fallback to English if the language code isn't found
                     document.querySelectorAll('.lang-en').forEach(el => {
                         el.classList.add('active');
+                        el.classList.remove('hidden');
                     });
                     console.warn(`Language code '${languageCode}' not found. Falling back to English.`);
                     return 'en';
@@ -209,10 +212,10 @@
         // Show console message with usage instructions
         console.log('Language Debug Tool');
         console.log('Switch languages using: switchLanguage("code")');
-        console.log('Available codes: en, ja, zh-CN, zh-MY, zh-SG, zh-TW');
+        console.log('Available codes: en, ja, zh-CN, zh-Hans, zh-TW');
         console.log('Example: switchLanguage("zh-CN")');
-        
     </script>
+    
     <script>
         /**
          * Main application script that works with the LanguageSelector class
@@ -223,7 +226,7 @@
                 { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
                 { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
                 { code: 'zh-CN', name: '中国大陆', localName: 'China Mainland', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
-                { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese(SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
+                { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese (SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
                 { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
             ];
             
@@ -244,11 +247,13 @@
                 if (langElement) {
                     document.querySelectorAll(`.lang-${languageCode}`).forEach(el => {
                         el.classList.add('active');
+                        el.classList.remove('hidden');
                     });
                 } else {
                     // Fallback to English if the language code isn't found
                     document.querySelectorAll('.lang-en').forEach(el => {
                         el.classList.add('active');
+                        el.classList.remove('hidden');
                     });
                 }
             }
@@ -260,8 +265,8 @@
                     const response = await fetch('https://ipapi.co/json/');
                     const data = await response.json();
                     
-                    // If country is China and region is not Hong Kong or Macau
-                    if (data.country_code === 'CN' && data.region !== '91' && data.region !== '92') {
+                    // If country is China (CN)
+                    if (data.country_code === 'CN') {
                         return true;
                     }
                     return false;
@@ -277,40 +282,52 @@
                 return navigator.language || navigator.userLanguage; // Return full language code (e.g., 'en-US')
             }
             
-            // Find matching language or fallback to Japanese/English
-            function getRecommendedLanguages(browserLang) {
+            // Find matching language or fallback based on new logic
+            function getRecommendedLanguages(browserLang, isInMainlandChina) {
                 const recommendations = [];
                 
-                // Special handling for Chinese language codes
+                // Priority 1: If user is in mainland China, force zh-CN
+                if (isInMainlandChina) {
+                    const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
+                    if (zhCNLang) {
+                        recommendations.push(zhCNLang);
+                        return recommendations;
+                    }
+                }
+                
+                // Priority 2: Handle Chinese language variants
                 if (browserLang.toLowerCase().startsWith('zh-')) {
-                    const zhVariants = ['zh-tw', 'zh-hk', 'zh-mo'];
                     const lowerCaseBrowserLang = browserLang.toLowerCase();
                     
-                    // Check if it's a traditional Chinese variant
-                    const isTraditionalVariant = zhVariants.some(variant => 
+                    // Traditional Chinese variants (Hong Kong, Macau, Taiwan)
+                    const traditionalVariants = ['zh-hk', 'zh-mo', 'zh-tw'];
+                    const isTraditionalVariant = traditionalVariants.some(variant => 
                         lowerCaseBrowserLang === variant || lowerCaseBrowserLang.startsWith(variant + '-')
                     );
                     
                     if (isTraditionalVariant) {
-                        // Use Traditional Chinese
+                        // Use Traditional Chinese (Taiwan)
                         const zhTWLang = languages.find(lang => lang.code === 'zh-TW');
                         if (zhTWLang) recommendations.push(zhTWLang);
                     } else {
-                        // Use Simplified Chinese for all other Chinese variants
-                        const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
-                        if (zhCNLang) recommendations.push(zhCNLang);
+                        // For other Chinese variants (zh-sg, zh-my, etc.), use Simplified Chinese (SEA)
+                        const zhHansLang = languages.find(lang => lang.code === 'zh-Hans');
+                        if (zhHansLang) recommendations.push(zhHansLang);
                     }
                     
                     return recommendations;
                 }
                 
-                // Check for exact match
-                const exactMatch = languages.find(lang => lang.code === browserLang || lang.code.startsWith(browserLang + '-'));
+                // Priority 3: Check for exact language match
+                const exactMatch = languages.find(lang => 
+                    lang.code === browserLang || 
+                    lang.code.startsWith(browserLang.split('-')[0])
+                );
                 if (exactMatch) {
                     recommendations.push(exactMatch);
                 }
                 
-                // If no exact match, add Japanese and English as fallbacks
+                // Priority 4: If no match, add Japanese and English as fallbacks
                 if (recommendations.length === 0) {
                     const japanese = languages.find(lang => lang.code === 'ja');
                     const english = languages.find(lang => lang.code === 'en');
@@ -349,66 +366,42 @@
             // Main function to handle language recommendation and location check
             async function handleLanguageSelection() {
                 const isInMainlandChina = await checkIfInMainlandChina();
+                const browserLang = getUserBrowserLanguage();
+                
+                console.log('Browser language:', browserLang);
+                console.log('Is in mainland China:', isInMainlandChina);
                 
                 if (isInMainlandChina) {
-                    // User is in mainland China, show simplified Chinese version
-                    const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
-                    if (zhCNLang) {
-                        // Show message and provide the link
-                        const container = document.getElementById('language-recommendation');
-                        const langsContainer = document.getElementById('recommended-langs');
-                        
-                        // Update the heading text
-                        document.querySelector('.lang-zh-CN.hidden').textContent = '根据您的位置，请访问中国大陆版本。';
-                        
-                        // Show Chinese text
-                        showLanguageText('zh-CN');
-                        updateFeedbackButton('zh-CN');
-                        
-                        const link = document.createElement('a');
-                        link.href = zhCNLang.link;
-                        link.target = '_blank';
-                        link.className = 'recommended-lang';
-                        link.textContent = zhCNLang.name;
-                        
-                        langsContainer.appendChild(link);
-                        
-                        // Show the container
-                        container.style.display = 'block';
-                    }
-                } else {
-                    // User is not in mainland China, proceed with normal language detection
-                    const browserLang = getUserBrowserLanguage();
-                    const recommendedLangs = getRecommendedLanguages(browserLang);
+                    // User is in mainland China, force Chinese (Simplified) - China
+                    const recommendedLangs = getRecommendedLanguages(browserLang, true);
+                    const detectedLanguage = 'zh-CN';
                     
-                    // Show text for the most relevant language
-                    const primaryLang = recommendedLangs[0]?.code || 'en';
-                    showLanguageText(primaryLang);
-                    updateFeedbackButton(primaryLang);
-                    
-                    // Display up to 4 recommended languages
+                    showLanguageText(detectedLanguage);
+                    updateFeedbackButton(detectedLanguage);
                     displayRecommendations(recommendedLangs);
+                    
+                    console.log('Detected location: Mainland China - Showing Simplified Chinese (China)');
+                } else {
+                    // User is not in mainland China, use browser language detection
+                    const recommendedLangs = getRecommendedLanguages(browserLang, false);
+                    
+                    // Determine the display language based on recommendations
+                    let detectedLanguage = 'en'; // Default to English
+                    
+                    if (recommendedLangs.length > 0) {
+                        detectedLanguage = recommendedLangs[0].code;
+                    }
+                    
+                    showLanguageText(detectedLanguage);
+                    updateFeedbackButton(detectedLanguage);
+                    displayRecommendations(recommendedLangs);
+                    
+                    console.log(`Detected language: ${detectedLanguage}`);
                 }
             }
             
-            // Start the language selection process
-            try {
-                await handleLanguageSelection();
-            } catch (error) {
-                console.error('Error in language selection:', error);
-                // Fallback: show English and Japanese options if there's an error
-                const fallbackLangs = [
-                    languages.find(lang => lang.code === 'en'),
-                    languages.find(lang => lang.code === 'ja')
-                ].filter(Boolean);
-                
-                if (fallbackLangs.length > 0) {
-                    // Show English text as fallback
-                    showLanguageText('en');
-                    updateFeedbackButton('en');
-                    displayRecommendations(fallbackLangs);
-                }
-            }
+            // Initialize the language selection
+            await handleLanguageSelection();
         });
     </script>
 </body>
