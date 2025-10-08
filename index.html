@@ -104,7 +104,6 @@
             const languages = [
                 { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
                 { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
-                { code: 'zh-CN', name: '中国大陆', localName: 'China Mainland', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
                 { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese (SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
                 { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
             ];
@@ -230,8 +229,8 @@
         // Show console message with usage instructions
         console.log('Language Debug Tool');
         console.log('Switch languages using: switchLanguage("code")');
-        console.log('Available codes: en, ja, zh-CN, zh-Hans, zh-TW');
-        console.log('Example: switchLanguage("zh-CN")');
+        console.log('Available codes: en, ja, zh-Hans, zh-TW');
+        console.log('Example: switchLanguage("ja")');
     </script>
     
     <script>
@@ -243,7 +242,6 @@
             const languages = [
                 { code: 'en', name: 'English', localName: 'English', link: 'https://chronie-shizutoki.github.io/self-info-en' },
                 { code: 'ja', name: '日本語', localName: 'Japanese', link: 'https://self-info-ja.netlify.app/' },
-                { code: 'zh-CN', name: '中国大陆', localName: 'China Mainland', link: 'https://chronie-shizutoki-self-info-zh-cn.netlify.app/' },
                 { code: 'zh-Hans', name: '华文', localName: 'Simplified Chinese (SEA)', link: 'https://self-info-zh-hans.netlify.app/' },
                 { code: 'zh-TW', name: '繁體中文（台灣）', localName: 'Traditional Chinese (Taiwan)', link: 'https://chronie-shizutoki.github.io/self-info-zh-tw/' },
             ];
@@ -276,24 +274,6 @@
                 }
             }
             
-            // Check if user is in mainland China
-            async function checkIfInMainlandChina() {
-                try {
-                    // Using a free IP geolocation API
-                    const response = await fetch('https://ipapi.co/json/');
-                    const data = await response.json();
-                    
-                    // If country is China (CN)
-                    if (data.country_code === 'CN') {
-                        return true;
-                    }
-                    return false;
-                } catch (error) {
-                    console.error('Error checking location:', error);
-                    return false; // Default to not in China if there's an error
-                }
-            }
-            
             // Get user's browser language
             function getUserBrowserLanguage() {
                 // Get the browser's language preference
@@ -301,17 +281,8 @@
             }
             
             // Find matching language or fallback based on new logic
-            function getRecommendedLanguages(browserLang, isInMainlandChina) {
+            function getRecommendedLanguages(browserLang) {
                 const recommendations = [];
-                
-                // Priority 1: If user is in mainland China, force zh-CN
-                if (isInMainlandChina) {
-                    const zhCNLang = languages.find(lang => lang.code === 'zh-CN');
-                    if (zhCNLang) {
-                        recommendations.push(zhCNLang);
-                        return recommendations;
-                    }
-                }
                 
                 // Priority 2: Handle Chinese language variants
                 if (browserLang.toLowerCase().startsWith('zh-')) {
@@ -383,25 +354,12 @@
             
             // Main function to handle language recommendation and location check
             async function handleLanguageSelection() {
-                const isInMainlandChina = await checkIfInMainlandChina();
                 const browserLang = getUserBrowserLanguage();
                 
                 console.log('Browser language:', browserLang);
-                console.log('Is in mainland China:', isInMainlandChina);
                 
-                if (isInMainlandChina) {
-                    // User is in mainland China, force Chinese (Simplified) - China
-                    const recommendedLangs = getRecommendedLanguages(browserLang, true);
-                    const detectedLanguage = 'zh-CN';
-                    
-                    showLanguageText(detectedLanguage);
-                    updateFeedbackButton(detectedLanguage);
-                    displayRecommendations(recommendedLangs);
-                    
-                    console.log('Detected location: Mainland China - Showing Simplified Chinese (China)');
-                } else {
-                    // User is not in mainland China, use browser language detection
-                    const recommendedLangs = getRecommendedLanguages(browserLang, false);
+                    // Use browser language detection
+                    const recommendedLangs = getRecommendedLanguages(browserLang);
                     
                     // Determine the display language based on recommendations
                     let detectedLanguage = 'en'; // Default to English
@@ -416,7 +374,6 @@
                     
                     console.log(`Detected language: ${detectedLanguage}`);
                 }
-            }
             
             // Initialize the language selection
             await handleLanguageSelection();
