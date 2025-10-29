@@ -10,46 +10,43 @@
 </head>
 <body>
     <div class="glass-container">
-        <h1>Language Choose</h1>
+        <h1><i class="fas fa-language"></i></h1>
         
-        <!-- Language-specific text containers -->
-        <div id="language-text" class="language-text">
-            <p class="lang-en">If this is not your preferred language, please select your desired language from the top-right</p>
-            <p class="lang-ja">これがあなたの希望する言語でない場合は、右上から希望の言語を選択してください</p>
-            <p class="lang-zh-CN">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
-            <p class="lang-zh-Hans">如果这不是你希望的语言，请从右上角选择你希望的语言</p>
-            <p class="lang-zh-TW">如果這不是你希望的語言，請從右上角選擇你希望的語言</p>
-        </div>
-        
-        <!-- Language recommendations container -->
-        <div id="language-recommendation" class="language-recommendation glass-container">
-            <h3 class="lang-en">Recommended Language:</h3>
-            <h3 class="lang-ja hidden">推奨される言語：</h3>
-            <h3 class="lang-zh-CN hidden">推荐语言：</h3>
-            <h3 class="lang-zh-Hans hidden">推荐语言：</h3>
-            <h3 class="lang-zh-TW hidden">推薦語言：</h3>
-            <div id="recommended-langs"></div>
-        </div>
-    </div>
-    
-    <!-- Feedback button with language-specific text -->
-    <button id="feedback-button" class="feedback-button">
-        <i class="fas fa-comment-dots"></i>
-        <span class="feedback-text lang-en">Feedback</span>
-        <span class="feedback-text lang-ja hidden">フィードバック</span>
-        <span class="feedback-text lang-zh-CN hidden">反馈</span>
-        <span class="feedback-text lang-zh-Hans hidden">反馈</span>
-        <span class="feedback-text lang-zh-TW hidden">回饋</span>
-    </button>
+<!-- Language-specific text containers -->
+<div id="language-text" class="language-text">
+    <p class="lang-en">Not your language? <span style="position:relative;top:-0.1em;">🌐</span> Pick a new one from the top-right corner!</p>
+    <p class="lang-ja">この言語が違う？右上の<span style="position:relative;top:-0.1em;">🌐</span>から好きな言語を選んでね！</p>
+    <p class="lang-zh-Hans">语言不对？快去右上角的<span style="position:relative;top:-0.1em;">🌐</span>选一个喜欢的吧！</p>
+    <p class="lang-zh-TW">語言不對？快去右上角的<span style="position:relative;top:-0.1em;">🌐</span>選一個喜歡的吧！</p>
+</div>
 
-    <!-- Changelog button with language-specific text -->
-    <button id="changelog-button" class="changelog-button">
-        <i class="fas fa-history"></i>
-        <span class="changelog-text lang-en">Changelog</span>
-        <span class="changelog-text lang-ja hidden">更新履歴</span>
-        <span class="changelog-text lang-zh-CN hidden">更新记录</span>
-        <span class="changelog-text lang-zh-TW hidden">更新記錄</span>
-    </button>
+<!-- Language recommendations container -->
+<div id="language-recommendation" class="language-recommendation glass-container">
+    <h3 class="lang-en">Purrfect Language for You: </h3>
+    <h3 class="lang-ja hidden">あなたにピッタリの言語: </h3>
+    <h3 class="lang-zh-Hans hidden">为你推荐最合适的语言: </h3>
+    <h3 class="lang-zh-TW hidden">為你推薦最合適的語言: </h3>
+    <div id="recommended-langs"></div>
+</div>
+</div>
+
+<!-- Feedback button with language-specific text -->
+<button id="feedback-button" class="feedback-button">
+    <i class="fas fa-comment-dots"></i>
+    <span class="feedback-text lang-en">Stuff</span>
+    <span class="feedback-text lang-ja hidden">意見</span>
+    <span class="feedback-text lang-zh-Hans hidden">想法</span>
+    <span class="feedback-text lang-zh-TW hidden">想法</span>
+</button>
+
+<!-- Changelog button with language-specific text -->
+<button id="changelog-button" class="changelog-button">
+    <i class="fas fa-history"></i>
+    <span class="changelog-text lang-en">New</span>
+    <span class="changelog-text lang-ja hidden">新着情報</span>
+    <span class="changelog-text lang-zh-Hans hidden">新鲜事</span>
+    <span class="changelog-text lang-zh-TW hidden">新鮮事</span>
+</button>
     
     <script>
         // Add event listener to feedback button

@@ -40,7 +40,7 @@ class LanguageSelector {
         const button = document.createElement('button');
         button.id = 'language-button';
         button.className = 'language-button';
-        button.innerHTML = '🌐 Language';
+        button.innerHTML = '🌐';
         
         // Add touch feedback for mobile devices
         button.style.touchAction = 'manipulation';

@@ -527,7 +527,7 @@ h1 {
     .language-popup {
         top: 80px;
         right: 20px;
-        width: calc(100vw - 40px);
+        max-width: 90%;
         padding: 1.5rem;
     }
     
@@ -594,7 +594,6 @@ h1 {
     .language-popup {
         top: 70px;
         right: 15px;
-        width: calc(100vw - 30px);
         padding: 1.25rem;
     }
     
